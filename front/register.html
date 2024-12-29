@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account - E-ShopPro</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background-color: #ee89c0;
+    }
+
+    /* Header Styling */
+    header {
+      background-color: #333;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #5c67f2;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #5c67f2;
+    }
+
+    /* Mobile Menu Icon */
+    .menu-icon {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #333;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-icon {
+        display: block;
+      }
+    }
+
+    /* Register Form Styling */
+    .register-form {
+      background-color: #fff;
+      padding: 2rem;
+      margin: 2rem auto;
+      width: 90%;
+      max-width: 400px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .register-form h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #5c67f2;
+      color: #fff;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #4a54e1;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      background-color: #333;
+      color: #fff;
+      padding: 1rem 0;
+      margin-top: 2rem;
+    }
+
+    /* Back to Login Link */
+    .back-to-login {
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+
+    .back-to-login a {
+      text-decoration: none;
+      color: #5c67f2;
+    }
+
+    /* Error Message Styling */
+    .error-message {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">styleHub<span>Pro</span></div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+      </ul>
+      <div class="menu-icon" id="menu-icon">&#9776;</div>
+    </nav>
+  </header>
+
+  <!-- Register Form -->
+  <div class="register-form">
+    <h2>Create Account</h2>
+    <form id="register-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+      </div>
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+      </div>
+      <button type="submit" class="btn">Create Account</button>
+    </form>
+    <div class="back-to-login">
+      <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+    <div class="error-message" id="error-message"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 E-ShopPro. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Handle Register Form Submission
+    const registerForm = document.getElementById('register-form');
+    const errorMessageElement = document.getElementById('error-message');
+
+    registerForm.addEventListener('submit', async (event) => {
+      event.preventDefault(); // Prevent form from refreshing
+
+      const fullName = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+
+      // Validate form fields
+      if (!fullName || !email || !password || !confirmPassword) {
+        errorMessageElement.textContent = 'All fields are required.';
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        errorMessageElement.textContent = 'Passwords do not match!';
+        return;
+      }
+
+      const userData = { email, password };
+
+      try {
+        const response = await fetch('http://localhost:3000/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData),
+        });
+
+        // Check if response is valid and can be parsed as JSON
+        let result;
+        try {
+          result = await response.json();
+        } catch (error) {
+          throw new Error('Invalid response from server');
+        }
+
+        if (response.ok) {
+          // Success case
+          alert(result.message || 'Account created successfully!');
+          window.location.href = 'login.html';  // Redirect to login
+        } else {
+          // Handle error from server
+          errorMessageElement.textContent = result.message || 'Failed to create account!';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        errorMessageElement.textContent = 'An error occurred while creating your account.';
+      }
+    });
+  </script>
+</body>
+</html>

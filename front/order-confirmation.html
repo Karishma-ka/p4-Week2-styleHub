@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Hub - Order Confirmation</title>
+  <link rel="stylesheet" href="styles/styles.css">
+  <style>/* Basic reset for all elements */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    /* Header styling */
+    header {
+      background-color: #ff85a2;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    header nav ul {
+      list-style: none;
+      display: flex;
+    }
+    
+    header nav ul li {
+      margin-left: 1rem;
+    }
+    
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    
+    header nav ul li a:hover {
+      background-color: #ff4d4d;
+    }
+    
+    /* Main content styling */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .order-confirmation h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    
+    .order-details {
+      padding: 1rem;
+    }
+    
+    .order-summary, .shipping-info, .contact-info {
+      margin-bottom: 1.5rem;
+    }
+    
+    .order-summary p, .shipping-info p, .contact-info p {
+      margin: 0.5rem 0;
+    }
+    
+    .next-steps {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .next-steps .btn {
+      padding: 0.75rem 1.5rem;
+      background-color: #ff85a2;
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    
+    .next-steps .btn:hover {
+      background-color: #ff4d4d;
+    }
+    
+    /* Footer styling */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 2rem;
+    }
+    
+    footer p {
+      margin: 0;
+    }</style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <nav>
+      <div class="logo">Style Hub</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Shop</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Order Confirmation Section -->
+  <main>
+    <section class="order-confirmation">
+      <h1>Order Confirmation</h1>
+      
+      <!-- Order Details -->
+      <div class="order-details">
+        <h2>Thank you for your order!</h2>
+        <p>Your order has been successfully placed. Below are your order details:</p>
+        
+        <div class="order-summary">
+          <p><strong>Order Number:</strong> <span class="order-number">#123456</span></p>
+          <p><strong>Order Date:</strong> <span class="order-date">2024-12-15</span></p>
+
+          <!-- List of ordered products -->
+          <div class="ordered-items">
+            <!-- Dynamically populated items -->
+          </div>
+
+          <!-- Order Total -->
+          <p><strong>Total:</strong> <span class="order-total">$69.98</span></p>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+          <h3>Contact Information:</h3>
+          <p><strong>Full Name:</strong> <span class="contact-name">John Doe</span></p>
+          <p><strong>Email:</strong> <span class="contact-email">johndoe@example.com</span></p>
+          <p><strong>Phone:</strong> <span class="contact-phone">123-456-7890</span></p>
+        </div>
+
+        <!-- Shipping and Payment Information -->
+        <div class="shipping-info">
+          <h3>Shipping Information:</h3>
+          <p><strong>Address:</strong> <span class="shipping-address">1234 Elm Street, Springfield, IL</span></p>
+          <p><strong>Country:</strong> <span class="shipping-country">USA</span></p>
+          
+          <h3>Payment Method:</h3>
+          <p><strong>Card Type:</strong> <span class="card-type">Visa</span></p>
+          <p><strong>Last 4 Digits:</strong> <span class="card-last4">1234</span></p>
+        </div>
+        
+        <!-- Next Steps -->
+        <div class="next-steps">
+          <a href="index.html" class="btn">Return to Home</a>
+          <a href="products.html" class="btn">Continue Shopping</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Style Hub. All rights reserved.</p>
+  </footer>
+
+  <!-- Inline JavaScript -->
+  <script>
+    // Get the order number from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderNumber = urlParams.get('orderNumber');
+
+    // Retrieve order details from sessionStorage
+    const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+
+    if (orderDetails && orderDetails.orderNumber == orderNumber) {
+      // Fill order details dynamically
+      document.querySelector('.order-number').textContent = orderDetails.orderNumber;
+      document.querySelector('.order-date').textContent = orderDetails.orderDate;
+      document.querySelector('.order-total').textContent = `$${orderDetails.total}`;
+      document.querySelector('.contact-name').textContent = orderDetails.fullName;
+      document.querySelector('.contact-email').textContent = orderDetails.email;
+      document.querySelector('.contact-phone').textContent = orderDetails.phone;
+      document.querySelector('.shipping-address').textContent = `${orderDetails.address}, ${orderDetails.city}, ${orderDetails.zip}`;
+      document.querySelector('.shipping-country').textContent = orderDetails.country;
+      document.querySelector('.card-type').textContent = 'Visa';
+      document.querySelector('.card-last4').textContent = orderDetails.cardNumber;
+
+      const productsContainer = document.querySelector('.ordered-items');
+      orderDetails.products.forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('ordered-item');
+        productDiv.innerHTML = `
+          <p><strong>${product.name}</strong> - $${product.price}</p>
+          <p>Quantity: ${product.quantity}</p>
+        `;
+        productsContainer.appendChild(productDiv);
+      });
+    } else {
+      alert('Error retrieving order details.');
+    }
+  </script>
+</body>
+</html>

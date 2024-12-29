@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Hub - Checkout</title>
+  <link rel="stylesheet" href="styles/styles.css">
+  <style>
+    /* Basic reset for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header styling */
+header {
+  background-color: #ff85a2;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+}
+
+header nav ul li {
+  margin-left: 1rem;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+header nav ul li a:hover {
+  background-color: #ff4d4d;
+}
+
+/* Main content styling */
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.checkout h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.checkout form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checkout form h2 {
+  margin-top: 1rem;
+}
+
+.checkout form label {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.checkout form input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.checkout form input:focus {
+  border-color: #ff85a2;
+  outline: none;
+}
+
+.checkout form .btn {
+  padding: 0.75rem;
+  background-color: #ff85a2;
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.checkout form .btn:hover {
+  background-color: #ff4d4d;
+}
+
+/* Footer styling */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+}
+
+footer p {
+  margin: 0;
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">Style Hub</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Shop</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="checkout">
+      <h1>Checkout</h1>
+      <form id="checkout-form">
+        <h2>Shipping Information</h2>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" required>
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" required>
+        <label for="country">Country</label>
+        <input type="text" id="country" name="country" required>
+        <label for="zip">ZIP Code</label>
+        <input type="text" id="zip" name="zip" required>
+        
+        <h2>Payment Information</h2>
+        <label for="card-number">Card Number</label>
+        <input type="text" id="card-number" name="card-number" required>
+        <label for="expiry">Expiry Date</label>
+        <input type="text" id="expiry" name="expiry" required>
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" name="cvv" required>
+
+        <button type="submit" class="btn">Place Order</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Style Hub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Handle form submission
+    document.getElementById('checkout-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Gather form data
+      const formData = new FormData(e.target);
+      const orderDetails = {
+        name: formData.get('name'),
+        address: formData.get('address'),
+        city: formData.get('city'),
+        country: formData.get('country'),
+        zip: formData.get('zip'),
+        cardNumber: formData.get('card-number').slice(-4),
+        expiry: formData.get('expiry'),
+        cvv: formData.get('cvv'),
+        orderNumber: Math.floor(Math.random() * 1000000), // Generate random order number
+        orderDate: new Date().toISOString().split('T')[0], // Current date
+        total: localStorage.getItem('cartTotal') || '0.00',
+        products: JSON.parse(localStorage.getItem('cart')) || []
+      };
+
+      // Save order details to sessionStorage
+      sessionStorage.setItem('orderDetails', JSON.stringify(orderDetails));
+
+      // Redirect to order confirmation page
+      window.location.href = `order-confirmation.html?orderNumber=${orderDetails.orderNumber}`;
+    });
+  </script>
+</body>
+</html>

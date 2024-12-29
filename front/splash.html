@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Hub - Splash Screen</title>
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div class="splash-screen">
+    <div class="splash-content">
+      <h1>Style Hub</h1>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content" style="display:none;">
+    <!-- Your Main Content Goes Here -->
+    <h2>Welcome to Style Hub!</h2>
+    <p>Explore our latest fashion collection.</p>
+  </div>
+
+  <!-- JavaScript for Splash Screen -->
+  <script>
+    // Wait for 3 seconds before showing the main content
+    setTimeout(function() {
+      document.querySelector('.splash-screen').style.display = 'none'; // Hide the splash screen
+      document.querySelector('.main-content').style.display = 'block'; // Show the main content
+    }, 3000); // 3 seconds
+  </script>
+</body>
+</html>

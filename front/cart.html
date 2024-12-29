@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Hub - Cart</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    main {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 0;
+    }
+
+    .cart {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cart h1 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .cart-items {
+      border-top: 1px solid #ddd;
+      padding-top: 15px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 15px;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-info h3 {
+      font-size: 18px;
+      margin: 0 0 5px;
+      color: #444;
+    }
+
+    .cart-item-info .price {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .quantity label {
+      font-size: 14px;
+      color: #555;
+      margin-right: 10px;
+    }
+
+    .quantity input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .remove-btn {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .remove-btn:hover {
+      background-color: #ff1a1a;
+    }
+
+    .cart-summary {
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    .cart-summary p {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <nav>
+      <div class="logo">Style Hub</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Shop</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Cart Section -->
+  <main>
+    <section class="cart">
+      <h1>Your Shopping Cart</h1>
+      <div class="cart-items" id="cart-items">
+        <!-- Cart items will be dynamically inserted here -->
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="cart-summary" id="cart-summary">
+        <p><strong>Total: </strong>$0.00</p>
+        <a href="checkout.html" class="btn">Proceed to Checkout</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Style Hub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartSummary = document.getElementById('cart-summary');
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      function updateCart() {
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
+          cartSummary.querySelector('p').innerHTML = '<strong>Total: </strong>$0.00';
+          return;
+        }
+
+        cart.forEach(item => {
+          const cartItem = document.createElement('div');
+          cartItem.classList.add('cart-item');
+          cartItem.setAttribute('data-id', item.id);
+
+          cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-info">
+              <h3>${item.name}</h3>
+              <p class="price">${item.price}</p>
+              <div class="quantity">
+                <label for="quantity-${item.id}">Quantity:</label>
+                <input type="number" id="quantity-${item.id}" name="quantity" min="1" value="${item.quantity}">
+              </div>
+              <button class="remove-btn">Remove</button>
+            </div>
+          `;
+
+          cartItemsContainer.appendChild(cartItem);
+
+          // Update total
+          const price = parseFloat(item.price.replace('$', ''));
+          total += price * item.quantity;
+        });
+
+        cartSummary.querySelector('p').innerHTML = `<strong>Total: </strong>$${total.toFixed(2)}`;
+
+        // Add event listeners to remove buttons
+        document.querySelectorAll('.remove-btn').forEach(button => {
+          button.addEventListener('click', (e) => {
+            const productId = e.target.closest('.cart-item').getAttribute('data-id');
+            removeFromCart(productId);
+          });
+        });
+
+        // Add event listeners to quantity inputs
+        document.querySelectorAll('.quantity input').forEach(input => {
+          input.addEventListener('change', (e) => {
+            const productId = e.target.closest('.cart-item').getAttribute('data-id');
+            const newQuantity = parseInt(e.target.value);
+            updateQuantity(productId, newQuantity);
+          });
+        });
+      }
+
+      function removeFromCart(id) {
+        cart = cart.filter(item => item.id !== id);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCart();
+      }
+
+      function updateQuantity(id, quantity) {
+        const itemIndex = cart.findIndex(item => item.id === id);
+        if (itemIndex > -1) {
+          cart[itemIndex].quantity = quantity;
+          localStorage.setItem('cart', JSON.stringify(cart));
+          updateCart();
+        }
+      }
+
+      updateCart();
+    });
+  </script>
+</body>
+</html>

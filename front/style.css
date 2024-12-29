@@ -1,0 +1,194 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: arial;
+    scroll-behavior: smooth;
+}
+
+/* footer link */
+.col-6>a {
+    display: block;
+}
+
+/* shop now btn */
+#shop-btn {
+    background-color: #ff8100;
+}
+
+/* width of every cards on product section */
+#card-width {
+    width: 18rem;
+}
+
+/* categories nav link */
+nav ul li {
+    margin: 5 1rem; /* Adds space between each nav item */
+}
+
+.nav-item .nav-link {
+    font-size: 20px;
+}
+
+header {
+    background-color: #ff85a2;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.logo-c {
+    max-width: 10px; /* Ensures the image scales down proportionally */
+    max-height: 20px; /* Ensures the image doesn't exceed the container */
+    object-fit: contain; /* Keeps the aspect ratio and fits within the container */
+}
+
+/* Splash Screen Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrolling while the splash screen is showing */
+}
+
+/* Splash screen background */
+.splash-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fbcfe8; /* Baby Pink */
+    color: #333;
+    z-index: 1000; /* Ensure splash screen is above the main content */
+}
+
+/* Splash content */
+.splash-content h1 {
+    font-size: 3rem;
+    color: #5c67f2;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 5px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Animation for the splash content */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Main content styling */
+.main-content {
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.main-content h2 {
+    font-size: 2rem;
+    color: #333;
+}
+
+@media (max-width: 768.98px) {
+    #input-form {
+        width: 35%;
+    }
+}
+
+/* responsive blog post. modify the width of image in each breakpoints */
+@media (min-width: 768px) {
+    .bg {
+        width: 350px;
+    }
+}
+
+@media (min-width: 992px) {
+    .bg {
+        width: 230px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .bg {
+        width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bg {
+        width: 250px;
+    }
+}
+
+@media (max-width: 578px) {
+    .bg {
+        width: 100%;
+    }
+}
+
+/* Additional styles for the dashboard */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+}
+
+.navbar .nav-link {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar .nav-link:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.profile-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.profile-card h2 {
+    margin: 0 0 10px;
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.logout-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: #555;
+}

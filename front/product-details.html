@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - Style Hub</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #ff85a2;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      list-style-type: none;
+      display: flex;
+    }
+
+    .nav-links li {
+      margin: 0 1rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      padding: 0 15px;
+      display: inline-block;
+    }
+
+    .nav-links a:hover {
+      color: #ffc107;
+    }
+
+    .product-detail {
+      max-width: 1200px;
+      margin: 2rem auto;
+      display: flex;
+      flex-wrap: wrap;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-detail img {
+      max-width: 100%;
+      border-radius: 8px;
+      flex: 1 1 40%;
+    }
+
+    .product-detail-content {
+      flex: 1 1 60%;
+      padding: 20px;
+    }
+
+    .product-detail-content ul {
+      list-style-type: none;
+    }
+
+    .product-detail-content li {
+      margin-bottom: 2rem;
+    }
+
+    .product-detail-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-detail-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-price {
+      font-size: 2rem;
+      color: #ff85a2;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #ff85a2;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #d94c4c;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">Style Hub</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Shop</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </header>
+
+  <!-- Product Detail Section -->
+  <section class="product-detail">
+ 
+    <div class="product-detail-content">
+      <ul>
+        
+        <li data-product-id="1">
+          <h1>Stylish Jacket</h1>
+          <img src="71wtyJeA+qL._SX679_.jpg" alt="Product Image">
+          <p>This stylish jacket is perfect for any occasion. Made with high-quality materials, it offers both comfort and style.</p>
+          <p class="product-price">$49.99</p>
+          <button class="btn add-to-cart">Add to Cart</button>
+        </li>
+        <li data-product-id="2">
+   
+        </li>
+        <li data-product-id="3">
+          <h1>Indianwear</h1>
+          <img src="Top_10_Must_Have.webp" alt="Product Image">
+          <p>This stylish Indianwear is perfect for any occasion. Made with high-quality materials, it offers both comfort and style.</p>
+          <p class="product-price">$49.99</p>
+          <button class="btn add-to-cart">Add to Cart</button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Style Hub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // JavaScript to handle adding items to the cart
+    document.addEventListener('DOMContentLoaded', () => {
+      const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+      addToCartButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const product = button.closest('li');
+          const productId = product.getAttribute('data-product-id');
+          const productName = product.querySelector('h1').innerText;
+          const productPrice = product.querySelector('.product-price').innerText;
+          const productImage = document.querySelector('.product-detail img').src;
+
+          addToCart(productId, productName, productPrice, productImage);
+        });
+      });
+
+      function addToCart(id, name, price, image) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        const existingProductIndex = cart.findIndex(item => item.id === id);
+
+        if (existingProductIndex > -1) {
+          cart[existingProductIndex].quantity += 1;
+        } else {
+          cart.push({ id, name, price, image, quantity: 1 });
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('Product added to cart!');
+      }
+    });
+  </script>
+</body>
+</html>

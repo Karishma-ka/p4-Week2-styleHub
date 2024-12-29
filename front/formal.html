@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Hub - Products</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .featured-products {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .featured-products h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .product-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      width: 300px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    .product-card h3 {
+      font-size: 1.5rem;
+      margin: 10px 0;
+    }
+
+    .product-card .price {
+      font-size: 1.2rem;
+      color: #ff85a2;
+      margin: 10px 0;
+    }
+
+    .product-card .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #ff85a2;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .product-card .btn:hover {
+      background-color: #d94c4c;
+    }
+
+    .product-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-card .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .product-card:hover .overlay {
+      opacity: 1;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background: #ff1a1a;
+    }
+  </style>
+</head>
+<body>
+  <section id="shop" class="featured-products">
+    <h2>Featured Products</h2>
+    <div class="products">
+      <div class="product-card" data-id="1" data-name="" data-price="50.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$49.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>
+      <div class="product-card" data-id="2" data-name="" data-price="39.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$39.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>
+      <div class="product-card" data-id="3" data-name="" data-price="29.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$29.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>  <div class="product-card" data-id="3" data-name="" data-price="29.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$29.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>  <div class="product-card" data-id="3" data-name="" data-price="29.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$29.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>  <div class="product-card" data-id="3" data-name="" data-price="29.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$29.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>  <div class="product-card" data-id="3" data-name="" data-price="29.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$29.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>  <div class="product-card" data-id="3" data-name="" data-price="29.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$29.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>  <div class="product-card" data-id="3" data-name="" data-price="29.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$29.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>  <div class="product-card" data-id="3" data-name="" data-price="29.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$29.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>  <div class="product-card" data-id="3" data-name="" data-price="29.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$29.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>  <div class="product-card" data-id="3" data-name="" data-price="29.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$29.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>  <div class="product-card" data-id="3" data-name="" data-price="29.99">
+        <img src="" alt="">
+        <h3></h3>
+        <p class="price">$29.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>
+      
+      <div class="product-card" data-id="11" data-name="Denim Skirt" data-price="25.99">
+        <img src="306888312_913280233409347_6632135761304598531_n-7e76bd125859449d8a1626ce5e678666.jpg" alt="Denim Skirt">
+        <h3>Denim Skirt</h3>
+        <p class="price">$25.99</p>
+        <button class="btn add-to-cart">Shop Now</button>
+        <div class="overlay more-details">Click for more details</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal" id="product-modal">
+    <div class="modal-content">
+      <button class="close-btn" id="close-modal">&times;</button>
+      <h2>Product Details</h2>
+      <img id="modal-image" src="" alt="Product Image" style="max-width: 50%;">
+      <h3 id="modal-title"></h3>
+      <p id="modal-price"></p>
+      <p id="modal-description"></p>
+      <button class="btn" id="modal-add-to-cart">Add to Cart</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const productCards = document.querySelectorAll('.product-card');
+      const modal = document.getElementById('product-modal');
+      const closeModalBtn = document.getElementById('close-modal');
+      const modalImage = document.getElementById('modal-image');
+      const modalTitle = document.getElementById('modal-title');
+      const modalPrice = document.getElementById('modal-price');
+      const modalDescription = document.getElementById('modal-description');
+      const modalAddToCartBtn = document.getElementById('modal-add-to-cart');
+      let currentProduct = {};
+
+      function addToCart(id, name, price, image) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingProductIndex = cart.findIndex(item => item.id === id);
+
+        if (existingProductIndex > -1) {
+          cart[existingProductIndex].quantity += 1;
+        } else {
+          cart.push({ id, name, price, image, quantity: 1 });
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('Product added to cart!');
+      }
+
+      document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const productCard = button.closest('.product-card');
+          const id = productCard.getAttribute('data-id');
+          const name = productCard.getAttribute('data-name');
+          const price = productCard.getAttribute('data-price');
+          const image = productCard.querySelector('img').src;
+
+          addToCart(id, name, price, image);
+        });
+      });
+
+      document.querySelectorAll('.more-details').forEach(button => {
+        button.addEventListener('click', (event) => {
+          const productCard = button.closest('.product-card');
+          const imgSrc = productCard.querySelector('img').src;
+          const title = productCard.querySelector('h3').innerText;
+          const price = productCard.querySelector('.price').innerText;
+          const id = productCard.getAttribute('data-id');
+          const name = productCard.getAttribute('data-name');
+
+          currentProduct = { id, name, price, imgSrc };
+
+          modalImage.src = imgSrc;
+          modalTitle.innerText = title;
+          modalPrice.innerText = price;
+          modalDescription.innerText = 'This is a detailed description of the product.';
+
+          modal.style.display = 'flex';
+        });
+      });
+
+      modalAddToCartBtn.addEventListener('click', () => {
+        addToCart(currentProduct.id, currentProduct.name, currentProduct.price, currentProduct.imgSrc);
+        modal.style.display = 'none';
+      });
+
+      closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
